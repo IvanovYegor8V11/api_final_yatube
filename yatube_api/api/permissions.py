@@ -1,7 +1,7 @@
 from rest_framework import permissions
 
 
-class OwnerOrReadOnly(permissions.BasePermission):
+class OwnershipPermission(permissions.BasePermission):
 
     def has_permission(self, request, view):
         return (
