@@ -1,57 +1,61 @@
-# Описание
-Платформа для публикации личных блогов.
+# API для Yatube
 
-# Функционал
-Аутентифицированный пользователь авторизован на изменение и удаление своего контента,
-в остальных случаях доступ предоставляется только для чтения.
+### Как запустить проект:
 
-- Получение JWT-токена.
-- Чтение/Публикация/Редакция/Удаление записей и комментариев.
-- Подписка на пользователей.
+Клонировать репозиторий и перейти в него в терминале:
 
-# Технологии
-- Python 3.9
-- Django 3.2.16
-- Django REST Framework 3.12.4
-- SQLite3
-
-# Установка и запуск
-
-Клонировать репозиторий:
 ```
-git clone <https or SSH URL>
+git clone https://github.com/TheCatRiX/api_final_yatube.git
 ```
 
-Перейти в папку проекта:
 ```
 cd api_final_yatube
 ```
 
-Создать и активировать виртуальное окружение:
+Cоздать и активировать виртуальное окружение:
+
 ```
-python3 -m venv venv
-source venv/bin/activate
+python -m venv venv
 ```
 
-Обновить pip:
+* Если у вас Linux/macOS
+
+    ```
+    source venv/bin/activate
+    ```
+
+* Если у вас Windows
+
+    ```
+    source venv/Scripts/activate
+    ```
+
 ```
-python3 -m pip install --upgrade pip
+python -m pip install --upgrade pip
 ```
 
-Установить зависимости:
+Установить зависимости из файла requirements.txt:
+
 ```
 pip install -r requirements.txt
 ```
 
-Выполнить миграции:
+Перейти в директорию с manage.py и выполнить миграции:
+
 ```
-python3 api_yatube/manage.py migrate
+cd yatube_api
 ```
 
-Запустить сервер:
 ```
-python3 api_yatube/manage.py runserver
+python manage.py migrate
 ```
 
-# Документация к API
-После запуска сервера, по адресу http://127.0.0.1:8000/redoc/ доступна документация к API.
+Запустить проект:
+
+```
+python manage.py runserver
+```
+
+### Документация:
+
+После запуска проекта по адресу `http://localhost:8000/redoc/` будет доступна документация для API Yatube в формате Redoc.

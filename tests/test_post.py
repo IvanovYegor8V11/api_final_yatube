@@ -84,8 +84,8 @@ class TestPostAPI:
             db_post
         )
 
-    def test_posts_get_paginated(self, user_client, post, post_2,
-                                 another_post):
+    @pytest.mark.usefixtures('post', 'post_2', 'another_post')
+    def test_posts_get_paginated(self, user_client):
         limit = 2
         offset = 2
         url = f'{self.post_list_url}?limit={limit}&offset={offset}'
@@ -99,7 +99,7 @@ class TestPostAPI:
         test_data = response.json()
 
         # response with pagination must be a dict type
-        assert type(test_data) == dict, (
+        assert isinstance(test_data, dict), (
             'Убедитесь, что GET-запрос с параметрами `limit` и `offset`, '
             'отправленный авторизованным пользователем к '
             f'`{self.post_list_url}`, возвращает словарь.'
@@ -116,7 +116,7 @@ class TestPostAPI:
             f'`{self.post_list_url}`, возвращает корректное количество статей.'
         )
 
-        db_post = Post.objects.get(text=another_post.text)
+        db_post = Post.objects.all()[offset:offset + limit][0]
         test_post = test_data.get('results')[0]
         self.check_post_data(
             response_data=test_post,

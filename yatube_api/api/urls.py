@@ -1,31 +1,18 @@
-from django.urls import path, include
-from rest_framework import routers
+from django.urls import include, path
+from rest_framework.routers import SimpleRouter
 
-import api.views as vs
+from .views import (
+    PostViewSet, CommentViewSet, GroupViewSet, FollowViewSet
+)
 
-router = routers.DefaultRouter()
-router.register(
-    'groups',
-    vs.GroupViewSet,
-    basename='groups',
-)
-router.register(
-    'posts',
-    vs.PostViewSet,
-    basename='posts',
-)
-router.register(
-    r'posts/(?P<post_id>\d+)/comments',
-    vs.CommentViewSet,
-    basename='comments',
-)
-router.register(
-    'follow',
-    vs.FollowViewSet,
-    basename='follow',
-)
+router = SimpleRouter()
+router.register('posts', PostViewSet, basename='post')
+router.register(r'posts/(?P<post_id>\d+)/comments', CommentViewSet,
+                basename='comment')
+router.register('groups', GroupViewSet, basename='group')
+router.register('follow', FollowViewSet, basename='follow')
 
 urlpatterns = [
-    path('v1/', include(router.urls)),
     path('v1/', include('djoser.urls.jwt')),
+    path('v1/', include(router.urls)),
 ]

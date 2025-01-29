@@ -1,8 +1,8 @@
 from django.contrib import admin
 
-from .models import Post, Group, Comment, Follow
+from .models import Post, Comment, Group, Follow
 
-
-@admin.register(Post, Group, Comment, Follow)
-class BlogAdmin(admin.ModelAdmin):
-    ...
+admin.site.register(Post)
+admin.site.register(Comment)
+admin.site.register(Group)
+admin.site.register(Follow)
