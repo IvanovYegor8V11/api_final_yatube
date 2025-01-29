@@ -1,0 +1,10 @@
+Django>=4
+pytest>=7
+pytest-pythonpath==0.7.3
+pytest-django>=4
+djangorestframework>=3
+djangorestframework-simplejwt>=5
+Pillow==10.3.0
+PyJWT>=2
+requests>=2
+django-environ>=0.9
