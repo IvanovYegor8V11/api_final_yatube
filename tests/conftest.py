@@ -1,6 +1,7 @@
 import sys
 import os
 
+#venom
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(BASE_DIR)
@@ -13,8 +14,8 @@ if (
         or not os.path.isdir(os.path.join(BASE_DIR, PROJECT_DIR_NAME))
 ):
     assert False, (
-        f'В директории `{BASE_DIR}` не найдена папка c проектом '
-        f'`{PROJECT_DIR_NAME}`. Убедитесь, что у вас верная структура проекта.'
+        f'В директории `{BASE_DIR}` не найдена папка c проктом '
+        f'`{PROJECT_DIR_NAME}`. Убедитесь, что у вас веная структура проекта.'
     )
 
 MANAGE_PATH = os.path.join(BASE_DIR, PROJECT_DIR_NAME)
@@ -24,7 +25,7 @@ FILENAME = 'manage.py'
 if FILENAME not in project_dir_content:
     assert False, (
         f'В директории `{MANAGE_PATH}` не найден файл `{FILENAME}`. '
-        'Убедитесь, что у вас верная структура проекта.'
+        'Убедитесь, что у вас верная сруктура проекта.'
     )
 
 pytest_plugins = [
@@ -36,11 +37,11 @@ pytest_plugins = [
 default_md = '# api_final\napi final\n'
 filename = 'README.md'
 assert filename in root_dir_content, (
-    f'В корне проекта не найден файл `{filename}.`'
+    f'В корне прокта не найден файл `{filename}.`'
 )
 
 with open(filename, 'r', errors='ignore') as f:
     file = f.read()
     assert file != default_md, (
-        f'Не забудьте оформить `{filename}.`'
+        f'Не забудте оформить `{filename}.`'
     )
