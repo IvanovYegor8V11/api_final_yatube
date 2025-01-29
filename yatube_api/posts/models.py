@@ -6,7 +6,7 @@ User = get_user_model()
 
 class Group(models.Model):
     title = models.CharField(max_length=200)
-    slug = models.SlugField(unique=True)
+    slug = models.SlugField(max_length=50, unique=True)
     description = models.TextField()
 
     def __str__(self):
@@ -21,12 +21,8 @@ class Post(models.Model):
     image = models.ImageField(
         upload_to='posts/', null=True, blank=True)
     group = models.ForeignKey(
-        Group,
-        blank=True,
-        null=True,
-        on_delete=models.SET_NULL,
-        related_name='posts',
-    )
+        Group, on_delete=models.CASCADE, related_name='posts',
+        null=True, blank=True)
 
     def __str__(self):
         return self.text
@@ -45,23 +41,9 @@ class Comment(models.Model):
 class Follow(models.Model):
     user = models.ForeignKey(
         User,
-        related_name='follower',
         on_delete=models.CASCADE,
-    )
+        related_name='follower')
     following = models.ForeignKey(
         User,
-        related_name='following',
         on_delete=models.CASCADE,
-    )
-
-    class Meta:
-        ordering = ('-user',)
-        constraints = (
-            models.UniqueConstraint(
-                fields=('user', 'following'),
-                name='unique_follows',
-            ),
-        )
-
-    def __str__(self) -> str:
-        return f'{self.user.username} подписан на {self.following.username}'
+        related_name='following')
